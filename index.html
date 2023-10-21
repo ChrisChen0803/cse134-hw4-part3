@@ -13,16 +13,26 @@
     </style>
 </head>
 <body>
-    <!-- 
-    iframe,canvas*, svg*, optgroup, 
-    datalist, details, summary, template, 
-    table, tr, td, th, col, colgroup, 
-    figure, figcaption,   (63 tags * 2 = 126pts)-->
     <main>
         <h1>Welcome to Chris' WebPage</h1>
         <caption>Scroll down to see more</caption>
         <section class="decorations">
+            <h3>Decorations</h3>
+            <svg width="100" height="100">
+                <circle cx="50" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
+            </svg>
             <code>console.log("Hello World!")</code>
+            <canvas id="myCanvas" width="200" height="100"></canvas>
+            <script>
+            var canvas = document.getElementById('myCanvas');
+            var ctx = canvas.getContext('2d');
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(50, 25, 100, 50);
+    </script>
+            <figure>
+                <img src="animation.jpg" alt="animation" width="100" height="100">
+                <figcaption>Animation</figcaption>
+              </figure>
             <picture>
                 <img src="bg.jpg" alt="Flowers" width="120" height="80">
             </picture>
@@ -34,6 +44,9 @@
                 <source src="video.mp4">
             </video>
             <iframe src="https://sage-dasik-fbf677.netlify.app/" title="ThisSite"></iframe>
+            <template>
+                <p>hiddenone</p>
+            </template>
         </section>
         <hr>
         <section class="summary">
@@ -53,6 +66,18 @@
                 <li>Location: San Diego, CA 92122</li>
             </ul>
         </section>
+        <section class="datalists">
+            <label for="fruits">Select a fruit:</label>
+                <input type="text" list="fruitList" id="fruits" name="fruits">
+                <datalist id="fruitList">
+                    <option value="Apple"></option>
+                    <option value="Banana"></option>
+                    <option value="Cherry"></option>
+                    <option value="Grapes"></option>
+                    <option value="Orange"></option>
+                    <option value="Peach"></option>
+                </datalist>
+        </section>
         <section class="project-list">
             <h2>Projects</h2>
             <ol>
@@ -70,6 +95,75 @@
                 Tutor for CSE 142 Computer Architecture Software Perspective
             </pre>
         </section>
+        <section class="classlist">
+            <details>
+                <summary>The class I have taken</summary>
+                <p>CSE11</p>
+                <p>CSE100</p>
+                <p>CSE101</p>
+                <p>CSE110</p>
+            </details>
+        </section>
+        <section class="skills">
+            <table>
+                <colgroup>
+                    <!-- Define column properties -->
+                    <col span="1">
+                    <col span="2">
+                    <col span="3">
+                    <col span="4">
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <th scope="row">Name</th>
+                        <th scope="row">Classification</th>
+                        <th scope="row">Experience</th>
+                        <th scope="row">Proficiency</th>
+                    </tr>
+                    <tr>
+                        <td>C</td>
+                        <td>Back-End Programming Language</td>
+                    </tr>
+                    <tr>
+                        <td>C++</td>
+                        <td>Back-End Programming Language</td>
+                    </tr>
+                    <tr>
+                        <td>Java</td>
+                        <td>Programming Language</td>
+                    </tr>
+                    <tr>
+                        <td>Python</td>
+                        <td>Back-End Programming Language</td>
+                    </tr>
+                    <tr>
+                        <td>HTML and CSS</td>
+                        <td>Front-End Programming Language</td>
+                    </tr>
+                    <tr>
+                        <td>JavaScript</td>
+                        <td>Front-End Programming Language</td>
+                    </tr>
+                    <tr>
+                        <td>NodeJs</td>
+                        <td>Web Development</td>
+                    </tr>
+                    <tr>
+                        <td>Express</td>
+                        <td>Web Development Frame</td>
+                    </tr>
+                    <tr>
+                        <td>MySQL</td>
+                        <td>Database</td>
+                    </tr>
+                    <tr>
+                        <td>Mongodb</td>
+                        <td>Database</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>You can find more skills in my resume</p>
+        </section>
         <div class="portfolio">
             <img src="portfolio.png" alt="portfolio" width="300" height="400">
             <aside>
@@ -81,9 +175,11 @@
     <form action="submit_chat.php" method="POST">
         <label for="media">Choose media</label>
         <select name="media" id="media">
-            <option value="LinkedIn">LinkedIn</option>
-            <option value="Ins">Ins</option>
-            <option value="email">email</option>
+            <optgroup label="SocialMedia">
+                <option value="LinkedIn">LinkedIn</option>
+                <option value="Ins">Ins</option>
+                <option value="email">email</option>
+            </optgroup>
         </select>
 
         <label for="contactinfo">Your contact info:</label>
@@ -91,9 +187,8 @@
         <button type="submit">Submit</button>
         </form>
     </section>
-
         <section class="comments">
-            <form action="submit_feedback.php" method="POST">
+            <form>
                 <fieldset>
                     <legend>If you have any comments, please leave it here</legend>
                     <label for="name">Your Name:</label>
