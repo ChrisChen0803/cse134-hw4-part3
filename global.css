@@ -1,0 +1,8 @@
+body {
+    margin: 0.5rem;
+    line-height: normal;
+  }
+  :root {
+    /* font size */
+    --font-size-head-title: 2em;
+  }
