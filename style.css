@@ -2,6 +2,31 @@
     font-family: 'Mulish';
     src: url('/Mulish-Regular.ttf') format('truetype');
 }
+@media only screen and (max-width: 480px) {
+    nav ul {
+        display: none; 
+    }
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 1024px) {
+    header {
+        padding: 10px 0;
+    }
+    nav ul li {
+        display: inline;
+        margin: 0 20px;
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+    header {
+        padding: 20px 0;
+    }
+}
 *{
     font-family: Mulish;
 }
@@ -36,6 +61,14 @@ main{
     padding: 10px;
     border-bottom: 1px solid black;
 }
+.nav-bar {
+    background-color: lightblue;
+  }
+  
+  .nav-bar a:hover {
+    background-color: #ddd;
+    color: black;
+  }
 table{
     border: 1px solid black;
 }
@@ -48,10 +81,10 @@ table{
     text-align: center;
     font-size: var(--font-size-head-title,2em);
     animation: moveRight 5s ease forwards;
-    background-color: color-mix(red, blue, 50%); 
+    background-color: color-mix(in srgb,#FF0000, blue); 
 }
 li:has(a) {
-    background-color: lightblue;
+    background-color: white;
   }
 @keyframes moveRight {
     0% {
