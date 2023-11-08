@@ -11,7 +11,10 @@
         margin: 10px 0;
     }
 }
-
+:root {
+    /* font size */
+    --font-size-head-title: 2em;
+  }
 @media only screen and (min-width: 481px) and (max-width: 1024px) {
     header {
         padding: 10px 0;
@@ -27,8 +30,17 @@
         padding: 20px 0;
     }
 }
+/*
+EXTRA CREDIT
+*/
+nav{
+    padding: 1%;
+    & a{
+        color:goldenrod;
+    }
+}
 *{
-    font-family: Mulish;
+    font-family: Mulish,sans-serif;
 }
 img {
     object-position: center;
@@ -81,7 +93,7 @@ table{
     text-align: center;
     font-size: var(--font-size-head-title,2em);
     animation: moveRight 5s ease forwards;
-    background-color: color-mix(in srgb,#FF0000, blue); 
+    background-color: color-mix(in srgb,#ff7f50, #ddd); 
 }
 li:has(a) {
     background-color: white;
@@ -103,7 +115,7 @@ li:has(a) {
 footer{
     position: absolute;
     max-width: 100%;
-    padding:1vh;
+    padding:2dvh;
 }
 .summary,.education,.personal-info{
     padding: 1vh 2vw;
