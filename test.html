@@ -152,6 +152,46 @@
                 </nav>
             </grid-item>
         </grid-container>
+        <grid-container>
+            <grid-item>
+                <h2>homework4 test</h2>
+                <form action="https://httpbin.org/post" method="post" id="hw4">
+                    <label for="name">Name:<span>(required)</span></label>
+                    <input type="text" id="formName" name="name">
+                    <output for="name" id="nameError"></output>
+                    <br>
+                    <label for="email">Email:<span>(required)</span></label>
+                    <input type="email" id="formEmail" name="email">
+                    <output for="email" id="emailError"></output>
+                    <br>
+                    <label for="comments">Comments:</label>
+                    <textarea id="formComments" name="comments" rows="1"></textarea>
+                    <output for="comments" id="commentsError"></output>
+                    <br>
+                    <input type="hidden" id="possible_bot" name="possible_bot" value="true">
+                    <button type="submit" onclick="event.preventDefault(); submitForm()">Submit</button>
+                    <output class="info" id="infoMessage"></output>
+                </form>
+            </grid-item>
+        </grid-container>
+        <grid-container>
+            <grid-item>
+                <h2>homework4 partD test</h2>
+                <form action="https://httpbin.org/post" method="post" id="hw4d">
+                    <label for="name">Name:<span>(required)</span></label>
+                    <input type="text" id="formNameD" name="name" required>
+                    <br>
+                    <label for="email">Email:<span>(required)</span></label>
+                    <input type="email" id="formEmailD" name="email" required>
+                    <br>
+                    <label for="comments">Comments:</label>
+                    <textarea id="formCommentsD" name="comments" rows="1" required></textarea>
+                    <br>
+                    <input type="hidden" id="possible_botD" name="possible_bot" value="true">
+                    <button type="submit">Submit</button>
+                </form>
+            </grid-item>
+        </grid-container>
     </main>
     <footer>
         <p>Author: Chris Chen</p>

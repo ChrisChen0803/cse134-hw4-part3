@@ -46,12 +46,6 @@ img {
     object-position: center;
     object-fit: fill;
   }
-body{
-    background-image: url('background.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-}
 img {
     max-width: 100%;
     height: auto;
@@ -92,19 +86,10 @@ table{
 #head-title{
     text-align: center;
     font-size: var(--font-size-head-title,2em);
-    animation: moveRight 5s ease forwards;
     background-color: color-mix(in srgb,#ff7f50, #ddd); 
 }
 li:has(a) {
     background-color: white;
-  }
-@keyframes moveRight {
-    0% {
-      transform: translateX(-10vw);
-    }
-    100% {
-      transform: translateX(10vw);
-    }
   }
 #portfolio-skills{
     position: relative;
@@ -124,6 +109,14 @@ footer{
     grid-column: 1 / 1;
     font-size: 1vw;
 }
+output {
+    margin-top: 10px;
+    color: red; /* Error messages color */
+  }
+
+  output.info {
+    color: green; /* Information messages color */
+  }
 .education,.personal-info{
     grid-row: 1/1;
     grid-column: 2 / 2;
@@ -137,3 +130,22 @@ footer{
 #comment-button:hover {
     background-color: #ff7f50;
   }
+.light-mode {
+    --background-img: url('background.jpg');
+    --text-color: #333;
+}
+.dark-mode {
+    --background-img: url('backgroundBlack.jpg');
+    --text-color: #fff;
+}
+
+body {
+    background-image: var(--background-img);
+    color: var(--text-color);
+}
+body{
+    background-image: var(--background-img);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}

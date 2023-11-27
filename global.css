@@ -5,4 +5,5 @@ body {
   :root {
     /* font size */
     --font-size-head-title: 2em;
+    --background-img: url('background.jpg')
   }

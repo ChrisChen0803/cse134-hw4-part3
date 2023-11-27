@@ -12,18 +12,11 @@
     <link rel="stylesheet" href="/global.css">
 </head>
 <body>
-    <nav class="nav-bar">
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </nav>
     <header>
         <grid-container class="header">
             <h1 id="head-title">Welcome to Chris' WebPage</h1>
         </grid-container>
+        <button type="button" id="modeButton">Dark Mode</button>
     </header>
     <main>
         <grid-container id="info-summary">
@@ -56,9 +49,9 @@
         <grid-container id="portfolio-skills">
                 <grid-item>
                     <picture>
-                        <source id="jepg" srcset="portfolio.jpeg" type="image/jpeg" media="(min-width: 900px)">
-                        <source srcset="portfolio.png" type="image/png" media="(min-width: 400px)">
-                        <img id="port-img" src="portfolio.webp" alt="portfolio" width="300" height="400">
+                        <source srcset="portfolio.png" type="image/png" media="(min-width: 600px)">
+                        <source srcset="portfolio.jpeg" type="image/jpeg">
+                        <img id="port-img" src="portfolio.png" alt="portfolio" width="300" height="400">
                     </picture>
                 <aside>
                     <p>This is my Persona Diagram</p>
@@ -160,6 +153,29 @@
                 </nav>
             </grid-item>
         </grid-container>
+        <grid-container>
+            <grid-item>
+                <h2>homework4 test</h2>
+                <form action="https://httpbin.org/post" method="post" id="hw4">
+                    <label for="name">Name:<span>(required)</span></label>
+                    <input type="text" id="formName" name="name">
+                    <output for="name" id="nameError">Name is required</output>
+                    <br>
+                    <label for="email">Email:<span>(required)</span></label>
+                    <input type="email" id="formEmail" name="email">
+                    <output for="email" id="emailError">Email is required or Email does not valid</output>
+                    <br>
+                    <label for="comments">Comments:</label>
+                    <textarea id="formComments" name="comments" rows="1"></textarea>
+                    <output for="comments" id="commentsError"></output>
+                    <br>
+                    <input type="hidden" id="possible_bot" name="possible_bot" value="true">
+                    <button type="submit">Submit</button>
+                    <br>
+                    <output class="info" id="infoMessage">Form submitted successfully!</output>
+                </form>
+            </grid-item>
+        </grid-container>
     </main>
     <footer>
         <p>Author: Chris Chen</p>
@@ -167,5 +183,34 @@
          <p>background img src: </p>
          <cite>https://www.google.com/imgres?imgurl=https%3A%2F%2Fbackgroundabstract.com%2Fwp-content%2Fuploads%2Fedd%2F2022%2F02%2F5594016-e1656071131636.jpg&tbnid=v7zi79V2mskT7M&vet=12ahUKEwjh0Mj_vauCAxX6OUQIHV0FAKcQMygNegUIARCTAQ..i&imgrefurl=https%3A%2F%2Fbackgroundabstract.com%2Fdownloads%2Fpaper-style-3d-rectangles-white-background%2F&docid=i8HzaJMfFDj-jM&w=3000&h=2000&q=white%20background&ved=2ahUKEwjh0Mj_vauCAxX6OUQIHV0FAKcQMygNegUIARCTAQ</cite>
     </footer>
+    <script>
+        let modeButton = document.getElementById('modeButton');
+        modeButton.addEventListener('click', function(event) {
+            if(localStorage.getItem("mode")==null){
+                localStorage.setItem("mode", "light");
+            }
+            if(localStorage.getItem("mode")==="light"){
+                localStorage.setItem("mode", "dark");
+                modeButton.textContent = "Light Mode";
+            }
+            else{
+                localStorage.setItem("mode","light");
+                modeButton.textContent = "Dark Mode";
+            }
+            setInitialTheme();
+            console.log(localStorage.getItem('mode'));
+        });
+        function setInitialTheme() {
+            const savedTheme = localStorage.getItem('mode');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+            else{
+                document.body.classList.remove('dark-mode');
+            }
+            console.log(document.body.classList);
+        }
+        setInitialTheme();
+    </script>
 </body>
 </html>

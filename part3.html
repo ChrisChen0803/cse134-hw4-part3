@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="twitter:site" content="@ChrisChen0803">
+    <meta name="twitter:title" content="Chris">
+    <meta name="twitter:description" content="This is my webpage and twitter">
+    <link rel="stylesheet" href="/style.css">
+    <script src="/script.js"></script>
+    <title>Personal WebPage</title>
+    <link rel="stylesheet" href="/global.css">
+    <style>
+        label,
+        input {
+            margin-bottom: 10px; /* Adjust the value as needed */
+        }
+        .error-fade-out {
+            animation: fadeOut 2s forwards;
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+        .info{
+            color:green;
+        }
+        .warn{
+            color:orange;
+        }
+        .error{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <grid-container class="header">
+            <h1 id="head-title">Welcome to Chris' WebPage</h1>
+        </grid-container>
+    </header>
+    <main>
+        <grid-container>
+            <grid-item>
+                <h2>homework4 test</h2>
+                <form action="https://httpbin.org/post" method="post" id="hw4">
+                    <label for="name">Name:<span>(required)</span></label>
+                    <input type="text" id="name" name="name">
+                    <output for="name" id="nameError"></output>
+                    <br>
+                    <label for="email">Email:<span>(required)</span></label>
+                    <input type="text" id="mail" name="mail">
+                    <output for="email" id="emailError"></output>
+                    <br>
+                    <label for="comments">Comments:</label>
+                    <textarea id="comments" name="comments" rows="1"></textarea>
+                    <output for="comments" id="commentsError"></output>
+                    <br>
+                    <input type="hidden" id="possible_bot" name="possible_bot" value="true">
+                    <button type="submit" id="formSubmission">Submit</button>
+                    <br>
+                    <output class="info" id="infoMessage"></output>
+                </form>
+            </grid-item>
+        </grid-container>
+    </main>
+    <footer>
+        <p>Author: Chris Chen</p>
+         <strong><a href="mailto:chc033@ucsd.edu">chc033@ucsd.edu</a></strong><br>
+         <p>background img src: </p>
+         <cite>https://www.google.com/imgres?imgurl=https%3A%2F%2Fbackgroundabstract.com%2Fwp-content%2Fuploads%2Fedd%2F2022%2F02%2F5594016-e1656071131636.jpg&tbnid=v7zi79V2mskT7M&vet=12ahUKEwjh0Mj_vauCAxX6OUQIHV0FAKcQMygNegUIARCTAQ..i&imgrefurl=https%3A%2F%2Fbackgroundabstract.com%2Fdownloads%2Fpaper-style-3d-rectangles-white-background%2F&docid=i8HzaJMfFDj-jM&w=3000&h=2000&q=white%20background&ved=2ahUKEwjh0Mj_vauCAxX6OUQIHV0FAKcQMygNegUIARCTAQ</cite>
+    </footer>
+    <script>
+        let form = document.getElementById('hw4');
+        let name = document.getElementById('name');
+        let email = document.getElementById('mail');
+        let error = document.getElementById('emailError');
+        let comments = document.getElementById('comments');
+        let nameError = document.getElementById('nameError');
+        let commentsError = document.getElementById('commentsError');
+        let submitButton = document.getElementById('formSubmission');
+        let form_errors = [];
+        window.addEventListener("load", () => {
+            email.setCustomValidity("Illegal email!"); 
+            name.setCustomValidity("Name is required");
+            name.className = "invalid";
+            email.className = "invalid";
+        });
+        const emailRegExp =/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        email.addEventListener("input", () => {
+            const isValid = emailRegExp.test(email.value);
+            if (isValid) {
+                console.log("valid");
+                email.setCustomValidity("");
+                email.className = "valid";
+                error.textContent = "";
+            } else {
+                console.log("invalid");
+                email.className = "invalid";
+                error.textContent = "Illegal email!"
+                email.setCustomValidity("Illegal email!"); 
+                setTimeout(() => {
+                    console.log(1);
+                    error.classList.add("error-fade-out");
+                }, 2000);
+            }
+        });
+        name.addEventListener("input", () => {
+            const isValid = name.value.length !== 0;
+            if (isValid) {
+                console.log("valid");
+                name.setCustomValidity("");
+                name.className = "valid";
+                nameError.textContent = "";
+            } else {
+                console.log("invalid");
+                name.className = "invalid";
+                nameError.textContent = "Name is required";
+                name.setCustomValidity("Name is required"); 
+                setTimeout(() => {
+                    console.log(1);
+                    nameError.classList.add("error-fade-out");
+                }, 2000);
+            }
+        });
+
+        comments.addEventListener("input", () => {
+                const maxLength = 50;
+                console.log(maxLength);
+                const remainingChars = maxLength - comments.value.length;
+                if (remainingChars >= 10) {
+                    commentsError.setCustomValidity("");
+                    commentsError.textContent = `Characters remaining: ${remainingChars}`;
+                    commentsError.className = "info";
+                } else if (remainingChars >= 0) {
+                    commentsError.setCustomValidity("");
+                    commentsError.textContent = `Warning! Characters remaining: ${remainingChars}`;
+                    commentsError.className = "warn";
+                } else {
+                    commentsError.textContent = "Error! Reached the character limitation";
+                    commentsError.className = "error";
+                    setTimeout(() => {
+                        commentsError.classList.add("error-fade-out");
+                    }, 2000);
+                    comments.setCustomValidity("Not Valid Text.");
+                }
+        });
+        submitButton.addEventListener('click', function(event) {
+            if (!form.checkValidity()) {
+                console.log("Form is not valid!");
+                let formErrorsJSON = JSON.stringify(formErrors);
+                let formData = new FormData(form);
+                form_errors.append(formData);
+            } else {
+                console.log("Form is valid!");
+            }
+            console.log()
+        });
+        
+    </script>
+</body>
+</html>
