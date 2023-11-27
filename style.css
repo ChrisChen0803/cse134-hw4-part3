@@ -133,15 +133,18 @@ output {
 .light-mode {
     --background-img: url('background.jpg');
     --text-color: #333;
+    --font: 'Mulish';
 }
 .dark-mode {
     --background-img: url('backgroundBlack.jpg');
     --text-color: #fff;
+    --font: 'serif';
 }
 
 body {
     background-image: var(--background-img);
     color: var(--text-color);
+    font-family: var(--font);
 }
 body{
     background-image: var(--background-img);
