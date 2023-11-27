@@ -92,6 +92,7 @@
             email.className = "invalid";
         });
         const emailRegExp =/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        const typeableRegExp = /^[a-zA-Z0-9!"#$%&'()*+,.\/:;<=>?@\[\] ^_`{|}~-]*$/;
         email.addEventListener("input", () => {
             const isValid = emailRegExp.test(email.value);
             if (isValid) {
@@ -128,38 +129,71 @@
                 }, 2000);
             }
         });
-
+        comments.setCustomValidity("No Valid Text.");
+        commentsError.className = "error";
         comments.addEventListener("input", () => {
                 const maxLength = 50;
-                console.log(maxLength);
                 const remainingChars = maxLength - comments.value.length;
-                if (remainingChars >= 10) {
-                    commentsError.setCustomValidity("");
-                    commentsError.textContent = `Characters remaining: ${remainingChars}`;
-                    commentsError.className = "info";
-                } else if (remainingChars >= 0) {
-                    commentsError.setCustomValidity("");
-                    commentsError.textContent = `Warning! Characters remaining: ${remainingChars}`;
-                    commentsError.className = "warn";
-                } else {
-                    commentsError.textContent = "Error! Reached the character limitation";
+                comments.setCustomValidity("");
+                console.log(remainingChars);
+                if (comments.value.length==0){
+                    commentsError.textContent = "No Comments.";
+                    comments.setCustomValidity("No Valid Text.");
                     commentsError.className = "error";
                     setTimeout(() => {
                         commentsError.classList.add("error-fade-out");
                     }, 2000);
+                }
+                else if (remainingChars >= 10) {
+                    comments.setCustomValidity("");
+                    commentsError.textContent = `Characters remaining: ${remainingChars}`;
+                    commentsError.className = "info";
+                } else if (remainingChars >= 0) {
+                    comments.setCustomValidity("");
+                    commentsError.textContent = `Warning! Characters remaining: ${remainingChars}`;
+                    commentsError.className = "warn";
+                } else {
+                    commentsError.textContent = "Error! Reached the character limitation";
                     comments.setCustomValidity("Not Valid Text.");
+                    commentsError.className = "error";
+                    setTimeout(() => {
+                        commentsError.classList.add("error-fade-out");
+                    }, 2000);
+                }
+                if(!typeableRegExp.test(comments.value)){
+                    console.log("mmmmmmmmm");
+                    commentsError.textContent = "Error! Invalid characters";
+                    comments.setCustomValidity("Invalid characters");
+                    commentsError.className = "error";
+                    setTimeout(() => {
+                        console.log(1);
+                        commentsError.classList.add("error-fade-out");
+                    }, 2000);
                 }
         });
         submitButton.addEventListener('click', function(event) {
             if (!form.checkValidity()) {
                 console.log("Form is not valid!");
-                let formErrorsJSON = JSON.stringify(formErrors);
-                let formData = new FormData(form);
-                form_errors.append(formData);
+                var errorObj = {
+                    "name" : name.value,
+                    "email" : email.value,
+                    "comments" : comments.value
+                }
+                form_errors.push(errorObj);
+                console.log(form_errors);
             } else {
                 console.log("Form is valid!");
             }
-            console.log()
+        });
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            var errorList = document.createElement('input');
+            errorList.type = 'text';
+            errorList.name = 'form-errors';
+            errorList.value = JSON.stringify(form_errors);
+            form.appendChild(errorList);
+            form_errors = [];
+            document.forms['hw4'].submit();
         });
         
     </script>
